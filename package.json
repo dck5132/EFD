@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --base-href=EFD",
+    "build": "ng build  --prod --output-hashing all",
     "deploy": "ng deploy --base-href=EFD",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
