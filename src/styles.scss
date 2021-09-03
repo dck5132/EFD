@@ -1,0 +1,25 @@
+@import url('https://fonts.cdnfonts.com/css/bender');
+@import './../node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css';
+
+body {
+  font-family: 'Bender', sans-serif !important;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: black !important;
+  color: white;
+}
+
+h1 {
+    width: 100vw;
+}
+
+.light-theme {
+  background: white;
+  color: black;
+}
+
+.dark-theme {
+  background: black;
+  color: white;
+}
