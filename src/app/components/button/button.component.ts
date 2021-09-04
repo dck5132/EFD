@@ -15,6 +15,7 @@ export class ButtonComponent implements OnInit {
 
   @Input() type: string = '';
   @Input() label: string = '';
+  @Input() disabled: boolean = false;
 
   constructor(
     private sessionMemoryService: SessionMemoryService,
