@@ -1,34 +1,64 @@
-import { Component, Inject, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
-
-import { MatDialog } from '@angular/material/dialog';
+import { Component, ElementRef, OnChanges, OnDestroy, OnInit, ViewChild } from '@angular/core';
 
 import * as Highcharts from 'highcharts';
 
-import { SessionMemoryService } from 'src/app/services/session-memory.service';
+import { Subscription } from 'rxjs';
 
-import { DialogComponent } from '../dialog/dialog.component';
+import { MapData } from 'src/app/interfaces/map-data';
+import { EmitterService } from 'src/app/services/emitter.service';
+
+import { SessionMemoryService } from 'src/app/services/session-memory.service';
 
 @Component({
   selector: 'app-high-pie-chart',
   templateUrl: './high-pie-chart.component.html',
   styleUrls: ['./high-pie-chart.component.scss']
 })
-export class HighPieChartComponent implements OnInit, OnChanges {
+export class HighPieChartComponent implements OnInit, OnChanges, OnDestroy {
+
+  @ViewChild('chart')
+  chart!: ElementRef;
 
   initialized = false;
 
-  data = [];
+  data:MapData[] = [];
 
   Highcharts: typeof Highcharts = Highcharts;
   chartOptions: Highcharts.Options = {};
+  chartCallback: Highcharts.ChartCallbackFunction = function (chart) { 
+    return chart;
+  }
+  updateFlag = false;
+
+  mapSelectionSubscription!: Subscription;
 
   constructor(
-    private sessionMemoryService:SessionMemoryService
+    private sessionMemoryService:SessionMemoryService,
+    public emitterService: EmitterService
     ) {}
 
   ngOnInit() {
     this.generatePieChartConfiguration();
     this.initialized = true;
+    console.log
+    this.mapSelectionSubscription = this.emitterService.mapSelected$.subscribe((selectedMap: string) => {
+      console.log(this.chart);
+      if (this.chartOptions.series !== undefined) {
+        this.chartOptions.series[0] = {
+          type: 'pie',
+          name: 'Maps',
+          colorByPoint: true,
+          data: this.sessionMemoryService.mapList,
+          events: {
+            legendItemClick: this.legendClicked.bind(this)
+          }
+        }
+        this.updateFlag = true;
+      }
+      else {
+        console.log('Typescript was right - who knew?');
+      }
+    });
   }
 
   ngOnChanges() {
@@ -40,10 +70,14 @@ export class HighPieChartComponent implements OnInit, OnChanges {
   legendClicked(event: any) {
     // console.log(event);
     let targetMap: string = event.target.name;
-    this.sessionMemoryService.modifyMapList(targetMap);
+    this.sessionMemoryService.modifyAvailableMaps(targetMap);
+    
   }
 
   generatePieChartConfiguration() {
+    this.sessionMemoryService.mapList.forEach((map) => {
+    });
+
     // Create Chart
     this.chartOptions = {
       chart: {
@@ -79,6 +113,7 @@ export class HighPieChartComponent implements OnInit, OnChanges {
       },
       plotOptions: {
         pie: {
+          slicedOffset: 20,
           point: {
             events: {
               legendItemClick: this.legendClicked.bind(this)
@@ -97,43 +132,7 @@ export class HighPieChartComponent implements OnInit, OnChanges {
           type: 'pie',
           name: 'Maps',
           colorByPoint: true,
-          data: [
-            {
-              name: 'Interchange',
-              y: 14.285,
-              color: '#AF00FF'
-            },
-            {
-              name: 'Woods',
-              y: 14.285,
-              color: '#0025FF'
-            },
-            {
-              name: 'Customs',
-              y: 14.285,
-              color: '#FF0000'
-            },
-            {
-              name: 'Shoreline',
-              y: 14.285,
-              color: '#039000'
-            },
-            {
-              name: 'The Lab',
-              y: 14.285,
-              color: '#2BC5F1'
-            },
-            {
-              name: 'Factory',
-              y: 14.285,
-              color: '#FBB9FA'
-            },
-            {
-              name: 'Reserve',
-              y: 14.285,
-              color: '#FF9100'
-            }
-          ],
+          data: this.sessionMemoryService.mapList,
           events: {
             legendItemClick: this.legendClicked.bind(this)
           }
@@ -141,5 +140,9 @@ export class HighPieChartComponent implements OnInit, OnChanges {
       ]
     };
     // console.log(this.chartOptions);
+  }
+
+  ngOnDestroy() {
+    this.emitterService.unsubscribe(this.mapSelectionSubscription);
   }
 }

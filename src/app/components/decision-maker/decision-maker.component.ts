@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SessionMemoryService } from 'src/app/services/session-memory.service';
 
 @Component({
   selector: 'app-decision-maker',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DecisionMakerComponent implements OnInit {
 
-  constructor() { }
+  constructor(public sessionMemoryService: SessionMemoryService) { }
 
   ngOnInit(): void {
   }
