@@ -101,37 +101,37 @@ export class HighPieChartComponent implements OnInit, OnChanges {
             {
               name: 'Interchange',
               y: 14.285,
-              color: 'purple'
+              color: '#AF00FF'
             },
             {
               name: 'Woods',
               y: 14.285,
-              color: 'grey'
+              color: '#0025FF'
             },
             {
               name: 'Customs',
               y: 14.285,
-              color: 'red'
+              color: '#FF0000'
             },
             {
               name: 'Shoreline',
               y: 14.285,
-              color: 'green'
+              color: '#039000'
             },
             {
               name: 'The Lab',
               y: 14.285,
-              color: 'teal'
+              color: '#2BC5F1'
             },
             {
               name: 'Factory',
               y: 14.285,
-              color: 'pink'
+              color: '#FBB9FA'
             },
             {
               name: 'Reserve',
               y: 14.285,
-              color: 'orange'
+              color: '#FF9100'
             }
           ],
           events: {
