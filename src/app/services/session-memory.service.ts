@@ -70,12 +70,10 @@ export class SessionMemoryService {
   }
 
   public checkTime() {
-    if (this.selectedTime.match(/Anytime/)) {
-      console.log('We need to handle this');
+    if (this.selectedTime.match(/Anytime/) && this.selectedMap) {
       this.displayedTime = RaidTimes[
         Math.floor(Math.random() * 2)
       ];
-      console.log(this.displayedTime);
     }
   }
 

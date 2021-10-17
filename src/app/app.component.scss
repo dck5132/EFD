@@ -3,9 +3,14 @@
     padding-bottom: 25px;
     padding-top: 25px;
   }
-  
-  .root-div {
+
+  .root-parent {
     width: 100vw;
     height: 100vh;
+  }
+  
+  .root-div {
+    overflow-y: auto;
+    height: 80vh;
   }
   
