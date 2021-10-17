@@ -1,6 +1,10 @@
-<highcharts-chart #chart 
+<div class="flex center">
+  <highcharts-chart #chart
+  class="size"
   [Highcharts]="Highcharts"
   [options]="chartOptions"
   [callbackFunction]="chartCallback"
   [(update)]="updateFlag"
-  style="width: 100vw; height: 50vh; display: block;"></highcharts-chart>
+  style="width: 50vw; height: 50vh;"></highcharts-chart>
+</div>
+

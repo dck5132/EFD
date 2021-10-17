@@ -29,6 +29,7 @@ export class ButtonComponent implements OnInit {
     // console.log('Selecting a Map!');
     if (this.type === 'Map') {
       this.sessionMemoryService.selectMap();
+      this.sessionMemoryService.checkTime();
       this.openDialog();
     }
     else {
