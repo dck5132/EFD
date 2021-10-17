@@ -106,6 +106,11 @@ export class HighPieChartComponent implements OnInit, OnChanges, OnDestroy {
         itemStyle: {
           color: 'white',
           fontSize: '14px'
+        },
+        itemHoverStyle: {
+          color: 'white',
+          fontSize: '16px',
+          fontWeight: 'bold'
         }
       },
       tooltip: {
