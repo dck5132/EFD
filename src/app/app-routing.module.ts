@@ -6,7 +6,7 @@ import { DecisionMakerComponent } from './components/decision-maker/decision-mak
 
 const routes: Routes = [
   { path: '', component: DecisionMakerComponent },
-  { path: '**', component: DecisionMakerComponent }
+  { path: '**', redirectTo: ''}
 ];
 
 @NgModule({

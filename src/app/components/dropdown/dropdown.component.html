@@ -1,0 +1,10 @@
+<div class="flex center">
+    <div class="my-4">
+        <mat-label><b>{{label}}</b></mat-label>
+        <mat-select [(ngModel)]="sessionMemoryService.selectedTime" placeholder="{{sessionMemoryService.selectedTime}}" name="time">
+            <mat-option *ngFor="let option of options" [value]="option">
+            {{option}}
+            </mat-option>
+        </mat-select>
+    </div>
+</div>

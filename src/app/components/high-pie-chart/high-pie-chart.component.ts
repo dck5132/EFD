@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnChanges, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnChanges, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 
 import * as Highcharts from 'highcharts';
 
@@ -12,7 +12,8 @@ import { SessionMemoryService } from 'src/app/services/session-memory.service';
 @Component({
   selector: 'app-high-pie-chart',
   templateUrl: './high-pie-chart.component.html',
-  styleUrls: ['./high-pie-chart.component.scss']
+  styleUrls: ['./high-pie-chart.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class HighPieChartComponent implements OnInit, OnChanges, OnDestroy {
 
@@ -40,9 +41,7 @@ export class HighPieChartComponent implements OnInit, OnChanges, OnDestroy {
   ngOnInit() {
     this.generatePieChartConfiguration();
     this.initialized = true;
-    console.log
     this.mapSelectionSubscription = this.emitterService.mapSelected$.subscribe((selectedMap: string) => {
-      console.log(this.chart);
       if (this.chartOptions.series !== undefined) {
         this.chartOptions.series[0] = {
           type: 'pie',
@@ -71,13 +70,13 @@ export class HighPieChartComponent implements OnInit, OnChanges, OnDestroy {
     // console.log(event);
     let targetMap: string = event.target.name;
     this.sessionMemoryService.modifyAvailableMaps(targetMap);
-    
+  }
+
+  chartClicked (event: any) {
+    return false;
   }
 
   generatePieChartConfiguration() {
-    this.sessionMemoryService.mapList.forEach((map) => {
-    });
-
     // Create Chart
     this.chartOptions = {
       chart: {
@@ -101,11 +100,16 @@ export class HighPieChartComponent implements OnInit, OnChanges, OnDestroy {
         margin: 25,
         title: {
           text:
-            '<div style="font-size: 14px; width: 35vw; text-align: center;">Please select maps you wish to ignore:</div>'
+            '<div class="flex center"><div class="legend">Please select maps you wish to ignore:</div></div>'
         },
         itemStyle: {
           color: 'white',
           fontSize: '14px'
+        },
+        itemHoverStyle: {
+          color: 'white',
+          fontSize: '16px',
+          fontWeight: 'bold'
         }
       },
       tooltip: {
@@ -134,7 +138,8 @@ export class HighPieChartComponent implements OnInit, OnChanges, OnDestroy {
           colorByPoint: true,
           data: this.sessionMemoryService.mapList,
           events: {
-            legendItemClick: this.legendClicked.bind(this)
+            legendItemClick: this.legendClicked.bind(this),
+            click: this.chartClicked.bind(this)
           }
         }
       ]

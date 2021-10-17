@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 import { MatDialogRef } from '@angular/material/dialog';
 
@@ -8,7 +8,8 @@ import { SessionMemoryService } from 'src/app/services/session-memory.service';
 @Component({
   selector: 'app-dialog',
   templateUrl: './dialog.component.html',
-  styleUrls: ['./dialog.component.scss']
+  styleUrls: ['./dialog.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class DialogComponent implements OnInit {
 

@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 
+import { Maps } from '../constants/chart.constants';
+import { RaidTimes } from '../constants/dropdown.constants';
 import { MapData } from '../interfaces/map-data';
+
 import { EmitterService } from './emitter.service';
 
 @Injectable({
@@ -8,53 +11,19 @@ import { EmitterService } from './emitter.service';
 })
 export class SessionMemoryService {
 
-  mapList: MapData[] = [
-    {
-      name: 'Interchange',
-      y: 14.285,
-      color: '#AF00FF',
-    },
-    {
-      name: 'Woods',
-      y: 14.285,
-      color: '#0025FF'
-    },
-    {
-      name: 'Customs',
-      y: 14.285,
-      color: '#FF0000'
-    },
-    {
-      name: 'Shoreline',
-      y: 14.285,
-      color: '#039000'
-    },
-    {
-      name: 'The Lab',
-      y: 14.285,
-      color: '#2BC5F1'
-    },
-    {
-      name: 'Factory',
-      y: 14.285,
-      color: '#FBB9FA'
-    },
-    {
-      name: 'Reserve',
-      y: 14.285,
-      color: '#FF9100'
-    }
-  ];
+  mapList = Maps
 
   availableMaps: string[] = [];
 
   selectedMap: string = '';
+  selectedTime: string = '';
+  displayedTime: string = '';
 
   selectButtonDisabled = false;
 
   constructor(public emitterService: EmitterService) {
     // populate availableMaps
-    this.mapList.forEach((map) => {
+    this.mapList.forEach((map: MapData) => {
       this.availableMaps.push(map.name);
     });
    }
@@ -98,6 +67,16 @@ export class SessionMemoryService {
     }
 
     this.emitterService.onMapSelected(this.selectedMap);
+  }
+
+  public checkTime() {
+    if (this.selectedTime.match(/Anytime/)) {
+      console.log('We need to handle this');
+      this.displayedTime = RaidTimes[
+        Math.floor(Math.random() * 2)
+      ];
+      console.log(this.displayedTime);
+    }
   }
 
 }

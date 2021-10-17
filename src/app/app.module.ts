@@ -11,11 +11,13 @@ import { HighchartsChartModule } from 'highcharts-angular';
 // Angular Material
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
 
 import { AppComponent } from './app.component';
 import { HighPieChartComponent } from './components/high-pie-chart/high-pie-chart.component';
 import { DecisionMakerComponent } from './components/decision-maker/decision-maker.component';
 import { ButtonComponent } from './components/button/button.component';
+import { DropdownComponent } from './components/dropdown/dropdown.component';
 
 @NgModule({
   imports: [
@@ -25,13 +27,15 @@ import { ButtonComponent } from './components/button/button.component';
     AppRoutingModule,
     HighchartsChartModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSelectModule
   ],
   declarations: [
     AppComponent,
     DecisionMakerComponent,
     HighPieChartComponent,
-    ButtonComponent
+    ButtonComponent,
+    DropdownComponent
   ],
   bootstrap: [AppComponent]
 })
