@@ -16,13 +16,15 @@ export class SessionMemoryService {
   availableMaps: string[] = [];
 
   selectedMap: string = '';
+
   selectedTime: string = '';
+  displayTime: boolean = true;
   displayedTime: string = '';
 
   selectButtonDisabled = false;
 
   constructor(public emitterService: EmitterService) {
-    // populate availableMaps
+    // populate available maps
     this.mapList.forEach((map: MapData) => {
       this.availableMaps.push(map.name);
     });
@@ -35,11 +37,18 @@ export class SessionMemoryService {
       this.availableMaps.push(map);
     }
     // check length of available maps so that there is more then 1 map
-    if (this.availableMaps.length > 1) {
-      this.selectButtonDisabled = false;
+    this.modifyAvailableTimes();
+  }
+
+  public modifyAvailableTimes() {
+    if (this.availableMaps.length < 1) {
+      this.selectButtonDisabled = true;
+    }
+    else if (this.availableMaps.length === 1 && (this.availableMaps.indexOf('The Lab') !== -1 || !this.selectedTime.match(/Anytime/))) {
+      this.selectButtonDisabled = true;
     }
     else {
-      this.selectButtonDisabled = true;
+      this.selectButtonDisabled = false;
     }
   }
 
@@ -57,8 +66,16 @@ export class SessionMemoryService {
 
     this.selectedMap = returnValue;
 
+    // Handle special condition in The Lab where you can't choose a time
+    if (this.selectedMap.match(/The Lab/)) {
+      this.displayTime = false;
+    }
+    else {
+      this.displayTime = true;
+    }
+
     for (let i in this.mapList) {
-      if (this.mapList[i].name === this.selectedMap) {
+      if (this.mapList[i].name === this.selectedMap && this.availableMaps.length > 1) {
         this.mapList[i].sliced = true;
       }
       else {
@@ -66,17 +83,13 @@ export class SessionMemoryService {
       }
     }
 
-    this.emitterService.onMapSelected(this.selectedMap);
-  }
-
-  public checkTime() {
-    if (this.selectedTime.match(/Anytime/)) {
-      console.log('We need to handle this');
+    if (this.selectedTime.match(/Anytime/) && this.displayTime && !clear) {
       this.displayedTime = RaidTimes[
-        Math.floor(Math.random() * 2)
+        1 + Math.floor(Math.random() * 2)
       ];
-      console.log(this.displayedTime);
     }
+
+    this.emitterService.onMapSelected(this.selectedMap);
   }
 
 }

@@ -1,1 +1,1 @@
-export const RaidTimes: string[] = ['Nighttime', 'Daytime', 'Anytime'];
+export const RaidTimes: string[] = ['Anytime', 'Daytime', 'Nighttime'];

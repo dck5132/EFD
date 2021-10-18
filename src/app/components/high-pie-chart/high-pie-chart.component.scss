@@ -5,4 +5,9 @@
     font-weight: bold;
 }
 
-@media (min-width: 320px) and (max-width: 426px) { .size{ width: 95vw !important}}
+.size {
+    width: 50vw;
+    height: 50vh;
+}
+
+@media screen and (max-width: 426px) { .size{ width: 100vw !important}};
