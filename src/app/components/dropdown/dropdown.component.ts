@@ -16,7 +16,7 @@ export class DropdownComponent implements OnInit {
   constructor(public sessionMemoryService: SessionMemoryService) { }
 
   ngOnInit(): void {
-    this.sessionMemoryService.selectedTime = this.options[this.options.length -1];
+    this.sessionMemoryService.selectedTime = this.options[0];
   }
 
 }

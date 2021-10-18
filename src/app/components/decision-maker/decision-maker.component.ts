@@ -11,7 +11,7 @@ import { SessionMemoryService } from 'src/app/services/session-memory.service';
 export class DecisionMakerComponent implements OnInit {
 
   raidTimes = RaidTimes;
-  raidTimesLabel = 'Please select your prefered raid time';
+  raidTimesLabel = 'Please select your prefered raid time: ';
 
   constructor(public sessionMemoryService: SessionMemoryService) { }
 
