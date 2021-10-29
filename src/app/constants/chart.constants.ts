@@ -4,7 +4,7 @@ export const Maps: MapData[] = [
     {
       name: 'Interchange',
       y: 14.285,
-      color: '#AF00FF',
+      color: '#AF00FF'
     },
     {
       name: 'Woods',

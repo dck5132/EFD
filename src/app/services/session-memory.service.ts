@@ -11,7 +11,7 @@ import { EmitterService } from './emitter.service';
 })
 export class SessionMemoryService {
 
-  mapList = Maps
+  mapList = Maps;
 
   availableMaps: string[] = [];
 
@@ -83,10 +83,16 @@ export class SessionMemoryService {
       }
     }
 
-    if (this.selectedTime.match(/Anytime/) && this.displayTime && !clear) {
-      this.displayedTime = RaidTimes[
-        1 + Math.floor(Math.random() * 2)
-      ];
+    if (!clear) {
+      if (this.selectedTime.match(/Anytime/) && this.displayTime) {
+        this.displayedTime = RaidTimes[
+          1 + Math.floor(Math.random() * 2)
+        ];
+      }
+      else {
+        console.log(this.displayedTime);
+        this.displayedTime = this.selectedTime;
+      }
     }
 
     this.emitterService.onMapSelected(this.selectedMap);
