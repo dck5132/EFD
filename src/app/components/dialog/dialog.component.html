@@ -1,6 +1,11 @@
-
-<h1 mat-dialog-title>Selected Map: {{sessionMemoryService.selectedMap}}! </h1>
-<h1 [hidden]="!sessionMemoryService.displayTime" mat-dialog-title>Selected Time: {{sessionMemoryService.displayedTime}}! </h1>
-<div class="right" mat-dialog-actions>
-    <button mat-raised-button color="primary" class="ok-button" (click)="closeDialog()"> Ok </button>
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-sm-12">
+            <h1 mat-dialog-title>Selected Map: {{sessionMemoryService.selectedMap}}! </h1>
+            <h1 [hidden]="!sessionMemoryService.displayTime" mat-dialog-title>Selected Time: {{sessionMemoryService.displayedTime}}! </h1>
+            <div class="d-flex flex-row-reverse" mat-dialog-actions>
+                <button mat-raised-button color="primary" class="ok-button" (click)="closeDialog()"> Ok </button>
+            </div>
+        </div>
+    </div>
 </div>

@@ -1,7 +1,11 @@
 <div class="vw-100 vh-100 px-1">
   <app-header></app-header>
-  <div class="root-div dark-theme pb-1">
-    <router-outlet></router-outlet>
+  <div class="container root-div dark-theme pb-1">
+    <div class="row">
+      <main class="col-12 col-sm-12">
+        <router-outlet></router-outlet>
+      </main>
+    </div>
   </div>
   <app-footer></app-footer>
 </div>
