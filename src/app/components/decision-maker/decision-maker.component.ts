@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { RaidTimes } from 'src/app/constants/dropdown.constants';
 import { SessionMemoryService } from 'src/app/services/session-memory.service';
+import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
   selector: 'app-decision-maker',
@@ -13,9 +15,20 @@ export class DecisionMakerComponent implements OnInit {
   raidTimes = RaidTimes;
   raidTimesLabel = 'Please select your prefered raid time: ';
 
-  constructor(public sessionMemoryService: SessionMemoryService) { }
+  constructor(public sessionMemoryService: SessionMemoryService,
+    public dialog: MatDialog
+    ) { }
 
   ngOnInit(): void {
+  }
+
+  activate() {
+    this.sessionMemoryService.selectMap();
+    this.openDialog();
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(DialogComponent);
   }
 
 }

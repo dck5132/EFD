@@ -100,7 +100,7 @@ export class HighPieChartComponent implements OnInit, OnChanges, OnDestroy {
         margin: 25,
         title: {
           text:
-            '<div class="flex center"><div class="legend">Please select maps you wish to ignore:</div></div>'
+            '<div class="d-flex align-items-center"><div class="legend fw-bold">Please select maps you wish to ignore:</div></div>'
         },
         itemStyle: {
           color: 'white',

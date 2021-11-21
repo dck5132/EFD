@@ -8,25 +8,6 @@ body {
   color: white;
 }
 
-.flex {
-  display: flex;
-}
-
-.center {
-  align-items: center;
-  justify-content: center;
-}
-
-.top {
-  vertical-align: top;
-  justify-content: center;
-}
-
-.bottom {
-  vertical-align: bottom;
-  justify-content: center;
-}
-
 .light-theme {
   background: white;
   color: black;
@@ -35,10 +16,6 @@ body {
 .dark-theme {
   background: black;
   color: white;
-}
-
-span {
-  font-size: 14px;
 }
 
 mat-label {
