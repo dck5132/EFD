@@ -1,3 +1,3 @@
 <app-high-pie-chart></app-high-pie-chart>
 <app-dropdown [label]="raidTimesLabel" [options]="raidTimes"></app-dropdown>
-<app-button [disabled]="sessionMemoryService.selectButtonDisabled" [label]="'Select a Map'" [type]="'Map'"></app-button>
+<button mat-raised-button color="primary" [disabled]="sessionMemoryService.selectButtonDisabled" class="d-block mx-auto" (click)="activate()">Select a Map</button>

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // Routing
 import { AppRoutingModule } from './app-routing.module';
 
@@ -16,7 +16,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { AppComponent } from './app.component';
 import { HighPieChartComponent } from './components/high-pie-chart/high-pie-chart.component';
 import { DecisionMakerComponent } from './components/decision-maker/decision-maker.component';
-import { ButtonComponent } from './components/button/button.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -26,6 +25,7 @@ import { HeaderComponent } from './components/header/header.component';
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     HighchartsChartModule,
     MatButtonModule,
@@ -36,7 +36,6 @@ import { HeaderComponent } from './components/header/header.component';
     AppComponent,
     DecisionMakerComponent,
     HighPieChartComponent,
-    ButtonComponent,
     DropdownComponent,
     FooterComponent,
     HeaderComponent
