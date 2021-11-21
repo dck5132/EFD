@@ -1,5 +1,5 @@
-<div class="d-flex center">
-    <div class="my-4">
+<div class="d-flex justify-content-center align-items-center">
+    <div class="my-2">
         <mat-label><b>{{label}}</b></mat-label>
         <mat-select class="dropdown" [(ngModel)]="sessionMemoryService.selectedTime" (selectionChange)="sessionMemoryService.modifyAvailableTimes()" placeholder="{{sessionMemoryService.selectedTime}}" name="time">
             <mat-option *ngFor="let option of options" [value]="option">
