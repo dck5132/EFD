@@ -1,9 +1,7 @@
 .legend {
     font-size: 14px;
     margin-top: -2rem;
-}
-
-.legend-width {
+    text-align: center;
     width: 35rem;
 }
 
@@ -12,4 +10,4 @@
     height: 50vh;
 }
 
-@media screen and (max-width: 500px) { .size{ width: 100vw !important}; .legend-width{width: 16rem !important}};
+@media screen and (max-width: 500px) { .size{ width: 100vw !important}; .legend{width: 16rem !important; text-align: left !important}};
