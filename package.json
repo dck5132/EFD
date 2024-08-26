@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build  --prod --output-hashing all",
-    "deploy": "ng deploy --base-href=/EFD/",
+    "build": "ng build --configuration production --output-hashing all",
+    "deploy": "ng deploy -r https://github.com/dck5132/EFD.git",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
