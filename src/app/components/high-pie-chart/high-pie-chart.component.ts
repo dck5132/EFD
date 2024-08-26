@@ -1,8 +1,8 @@
-import { Component, ElementRef, OnChanges, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnChanges, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 
 import * as Highcharts from 'highcharts';
 
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 import { MapData } from 'src/app/interfaces/map-data';
 import { EmitterService } from 'src/app/services/emitter.service';
@@ -18,7 +18,7 @@ import { SessionMemoryService } from 'src/app/services/session-memory.service';
 export class HighPieChartComponent implements OnInit, OnChanges, OnDestroy {
 
   @ViewChild('chart')
-  chart!: ElementRef;
+  chart$!: Observable<Highcharts.Chart>;
 
   initialized = false;
 
