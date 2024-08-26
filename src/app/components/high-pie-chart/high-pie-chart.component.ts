@@ -46,7 +46,6 @@ export class HighPieChartComponent implements OnInit, OnChanges, OnDestroy {
         this.chartOptions.series[0] = {
           type: 'pie',
           name: 'Maps',
-          colorByPoint: true,
           data: this.sessionMemoryService.mapList,
           events: {
             legendItemClick: this.legendClicked.bind(this)
@@ -135,7 +134,6 @@ export class HighPieChartComponent implements OnInit, OnChanges, OnDestroy {
         {
           type: 'pie',
           name: 'Maps',
-          colorByPoint: true,
           data: this.sessionMemoryService.mapList,
           events: {
             legendItemClick: this.legendClicked.bind(this),
