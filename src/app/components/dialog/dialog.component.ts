@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
-import { MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 
 import { EmitterService } from 'src/app/services/emitter.service';
 import { SessionMemoryService } from 'src/app/services/session-memory.service';
