@@ -112,6 +112,7 @@
           "builder": "angular-cli-ghpages:deploy",
           "options": {
             "dir": "dist/Escape-From-Decisions/browser",
+            "repo": "https://github.com/dck5132/EFD.git",
             "baseHref": "/EFD/",
             "name": "Cyril Kalikin",
             "email": "dck5132@gmail.com"
