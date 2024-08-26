@@ -65,5 +65,5 @@ export const Maps: MapData[] = [
       name: 'Ground Zero',
       y: 10,
       color: '4d3f2c'
-    }
+    },
   ];
