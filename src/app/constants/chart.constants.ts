@@ -32,6 +32,21 @@ export const Maps: MapData[] = [
       color: '#FBB9FA'
     },
     {
+      name: 'Lighthouse',
+      y: 10,
+      color: '#777c44'
+    },
+    {
+      name: 'Streets',
+      y: 10,
+      color: '#98acaa'
+    },
+    {
+      name: 'Ground Zero',
+      y: 10,
+      color: '#4d3f2c'
+    },
+    {
       name: 'Reserve',
       y: 10,
       color: '#FF9100'
