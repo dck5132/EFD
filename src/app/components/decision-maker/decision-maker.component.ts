@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { RaidTimes } from 'src/app/constants/dropdown.constants';
 import { SessionMemoryService } from 'src/app/services/session-memory.service';
 import { DialogComponent } from '../dialog/dialog.component';
