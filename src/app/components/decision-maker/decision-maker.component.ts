@@ -5,10 +5,11 @@ import { SessionMemoryService } from 'src/app/services/session-memory.service';
 import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
-  selector: 'app-decision-maker',
-  templateUrl: './decision-maker.component.html',
-  styleUrls: ['./decision-maker.component.scss'],
-  encapsulation: ViewEncapsulation.None
+    selector: 'app-decision-maker',
+    templateUrl: './decision-maker.component.html',
+    styleUrls: ['./decision-maker.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class DecisionMakerComponent implements OnInit {
 

@@ -3,10 +3,11 @@ import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { SessionMemoryService } from 'src/app/services/session-memory.service';
 
 @Component({
-  selector: 'app-dropdown',
-  templateUrl: './dropdown.component.html',
-  styleUrls: ['./dropdown.component.scss'],
-  encapsulation: ViewEncapsulation.None
+    selector: 'app-dropdown',
+    templateUrl: './dropdown.component.html',
+    styleUrls: ['./dropdown.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class DropdownComponent implements OnInit {
 

@@ -6,10 +6,11 @@ import { EmitterService } from 'src/app/services/emitter.service';
 import { SessionMemoryService } from 'src/app/services/session-memory.service';
 
 @Component({
-  selector: 'app-dialog',
-  templateUrl: './dialog.component.html',
-  styleUrls: ['./dialog.component.scss'],
-  encapsulation: ViewEncapsulation.None
+    selector: 'app-dialog',
+    templateUrl: './dialog.component.html',
+    styleUrls: ['./dialog.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class DialogComponent implements OnInit {
 

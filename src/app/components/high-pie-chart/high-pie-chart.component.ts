@@ -10,10 +10,11 @@ import { EmitterService } from 'src/app/services/emitter.service';
 import { SessionMemoryService } from 'src/app/services/session-memory.service';
 
 @Component({
-  selector: 'app-high-pie-chart',
-  templateUrl: './high-pie-chart.component.html',
-  styleUrls: ['./high-pie-chart.component.scss'],
-  encapsulation: ViewEncapsulation.None
+    selector: 'app-high-pie-chart',
+    templateUrl: './high-pie-chart.component.html',
+    styleUrls: ['./high-pie-chart.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class HighPieChartComponent implements OnInit, OnChanges, OnDestroy {
 
