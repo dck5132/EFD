@@ -1,27 +1,26 @@
-import { Component, OnChanges, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 
 import * as Highcharts from 'highcharts';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 import { Observable, Subscription } from 'rxjs';
-
+// Interfaces
 import { MapData } from 'src/app/interfaces/map-data';
+// Services
 import { EmitterService } from 'src/app/services/emitter.service';
-
 import { SessionMemoryService } from 'src/app/services/session-memory.service';
 
 @Component({
     selector: 'app-high-pie-chart',
+    imports: [HighchartsChartModule],
     templateUrl: './high-pie-chart.component.html',
     styleUrls: ['./high-pie-chart.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    standalone: false
 })
-export class HighPieChartComponent implements OnInit, OnChanges, OnDestroy {
+export class HighPieChartComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('chart')
   chart$!: Observable<Highcharts.Chart>;
-
-  initialized = false;
 
   data:MapData[] = [];
 
@@ -39,19 +38,21 @@ export class HighPieChartComponent implements OnInit, OnChanges, OnDestroy {
     public emitterService: EmitterService
     ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.generatePieChartConfiguration();
-    this.initialized = true;
-    this.mapSelectionSubscription = this.emitterService.mapSelected$.subscribe((selectedMap: string) => {
+    this.mapSelectionSubscription = this.emitterService.mapSelected$.subscribe(() => {
       if (this.chartOptions.series !== undefined) {
         this.chartOptions.series[0] = {
           type: 'pie',
           name: 'Maps',
           data: this.sessionMemoryService.mapList,
-          events: {
-            legendItemClick: this.legendClicked.bind(this)
-          }
         }
+        this.chartOptions.legend = {
+          events: {
+            itemClick: this.legendClicked.bind(this)
+          },
+        }
+
         this.updateFlag = true;
       }
       else {
@@ -59,24 +60,23 @@ export class HighPieChartComponent implements OnInit, OnChanges, OnDestroy {
       }
     });
   }
-
-  ngOnChanges() {
-    if (this.initialized) {
-      this.generatePieChartConfiguration();
-    }
+  ngAfterViewInit(): void {
+    this.generatePieChartConfiguration();
   }
 
-  legendClicked(event: any) {
-    // console.log(event);
-    let targetMap: string = event.target.name;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  legendClicked(event: any): void {
+    console.log(event.legendItem.name);
+    const targetMap: string = event.legendItem.name;
     this.sessionMemoryService.modifyAvailableMaps(targetMap);
   }
-
-  chartClicked (event: any) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+  chartClicked(event: any): boolean {
+    console.log(event);
     return false;
   }
 
-  generatePieChartConfiguration() {
+  generatePieChartConfiguration(): void {
     // Create Chart
     this.chartOptions = {
       chart: {
@@ -102,6 +102,9 @@ export class HighPieChartComponent implements OnInit, OnChanges, OnDestroy {
           text:
             '<div class="d-flex align-items-center"><div class="legend fw-bold">Please select maps you wish to ignore:</div></div>'
         },
+        events: {
+          itemClick: this.legendClicked.bind(this)
+        },
         itemStyle: {
           color: 'white',
           fontSize: '14px'
@@ -118,11 +121,6 @@ export class HighPieChartComponent implements OnInit, OnChanges, OnDestroy {
       plotOptions: {
         pie: {
           slicedOffset: 20,
-          point: {
-            events: {
-              legendItemClick: this.legendClicked.bind(this)
-            }
-          },
           allowPointSelect: true,
           cursor: 'pointer',
           dataLabels: {
@@ -137,16 +135,14 @@ export class HighPieChartComponent implements OnInit, OnChanges, OnDestroy {
           name: 'Maps',
           data: this.sessionMemoryService.mapList,
           events: {
-            legendItemClick: this.legendClicked.bind(this),
             click: this.chartClicked.bind(this)
           }
         }
       ]
     };
-    // console.log(this.chartOptions);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.emitterService.unsubscribe(this.mapSelectionSubscription);
   }
 }

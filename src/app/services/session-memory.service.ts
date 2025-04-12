@@ -15,11 +15,11 @@ export class SessionMemoryService {
 
   availableMaps: string[] = [];
 
-  selectedMap: string = '';
+  selectedMap = '';
 
-  selectedTime: string = '';
-  displayTime: boolean = true;
-  displayedTime: string = '';
+  selectedTime = '';
+  displayTime = true;
+  displayedTime = '';
 
   selectButtonDisabled = false;
 
@@ -52,7 +52,7 @@ export class SessionMemoryService {
     }
   }
 
-  public selectMap(clear: boolean = false) {
+  public selectMap(clear = false) {
     let returnValue: string;
 
     if (clear) {
@@ -74,14 +74,14 @@ export class SessionMemoryService {
       this.displayTime = true;
     }
 
-    for (let i in this.mapList) {
-      if (this.mapList[i].name === this.selectedMap && this.availableMaps.length > 1) {
-        this.mapList[i].sliced = true;
+    this.mapList.forEach((map: MapData) => {
+      if (map.name === this.selectedMap && this.availableMaps.length > 1) {
+        map.sliced = true;
       }
       else {
-        this.mapList[i].sliced = false;
+        map.sliced = false;
       }
-    }
+    });
 
     if (!clear) {
       if (this.selectedTime.match(/Anytime/) && this.displayTime) {

@@ -8,14 +8,17 @@ import { Observable, Subject, Subscription } from 'rxjs';
 export class EmitterService {
 
   // Subjects to emit
-  private mapSelected: Subject<string> = new Subject();
+  private mapSelected: Subject<string>;
 
   // Observables to listen for subject that is emitted
-  public mapSelected$: Observable<string> = this.mapSelected.asObservable();
+  public mapSelected$: Observable<string>;
 
-  constructor() { }
+  constructor() {
+    this.mapSelected = new Subject<string>();
+    this.mapSelected$ = this.mapSelected.asObservable();
+   }
 
-  onMapSelected(change: string = '') {
+  onMapSelected(change = '') {
     this.mapSelected.next(change);
   }
 
