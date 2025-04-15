@@ -18,11 +18,11 @@ export class EmitterService {
     this.mapSelected$ = this.mapSelected.asObservable();
    }
 
-  onMapSelected(change = '') {
+  onMapSelected(change = ''): void {
     this.mapSelected.next(change);
   }
 
-  unsubscribe(subscription: Subscription) {
+  unsubscribe(subscription: Subscription): void {
     if (subscription) {
       subscription.unsubscribe();
     }

@@ -55,9 +55,6 @@ export class HighPieChartComponent implements OnInit, AfterViewInit, OnDestroy {
 
         this.updateFlag = true;
       }
-      else {
-        console.log('Typescript was right - who knew?');
-      }
     });
   }
   ngAfterViewInit(): void {

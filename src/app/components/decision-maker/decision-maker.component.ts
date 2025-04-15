@@ -23,11 +23,12 @@ export class DecisionMakerComponent {
   raidTimes = RaidTimes;
   raidTimesLabel = 'Please select your prefered raid time: ';
 
-  constructor(public sessionMemoryService: SessionMemoryService,
+  constructor(
+    public sessionMemoryService: SessionMemoryService,
     public dialog: MatDialog
   ) { }
 
-  activate():void {
+  activate(): void {
     this.sessionMemoryService.selectMap();
     this.openDialog();
   }

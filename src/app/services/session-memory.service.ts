@@ -30,7 +30,7 @@ export class SessionMemoryService {
     });
    }
 
-  public modifyAvailableMaps(map: string) {
+  public modifyAvailableMaps(map: string): void {
     if (this.availableMaps.indexOf(map) !== -1) {
       this.availableMaps = this.availableMaps.filter(ml => ml !== map);
     } else {
@@ -40,7 +40,7 @@ export class SessionMemoryService {
     this.modifyAvailableTimes();
   }
 
-  public modifyAvailableTimes() {
+  public modifyAvailableTimes(): void {
     if (this.availableMaps.length < 1) {
       this.selectButtonDisabled = true;
     }
@@ -52,7 +52,7 @@ export class SessionMemoryService {
     }
   }
 
-  public selectMap(clear = false) {
+  public selectMap(clear = false): void {
     let returnValue: string;
 
     if (clear) {
