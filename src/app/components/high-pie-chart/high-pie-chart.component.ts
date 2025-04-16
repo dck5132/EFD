@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 
 import * as Highcharts from 'highcharts';
 import { HighchartsChartModule } from 'highcharts-angular';
@@ -7,7 +7,6 @@ import { Observable, Subscription } from 'rxjs';
 // Interfaces
 import { MapData } from 'src/app/interfaces/map-data';
 // Services
-import { EmitterService } from 'src/app/services/emitter.service';
 import { SessionMemoryService } from 'src/app/services/session-memory.service';
 
 @Component({
@@ -17,12 +16,12 @@ import { SessionMemoryService } from 'src/app/services/session-memory.service';
     styleUrls: ['./high-pie-chart.component.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-export class HighPieChartComponent implements OnInit, AfterViewInit, OnDestroy {
+export class HighPieChartComponent implements OnInit {
 
   @ViewChild('chart')
   chart$!: Observable<Highcharts.Chart>;
 
-  data:MapData[] = [];
+  data: MapData[] = [];
 
   Highcharts: typeof Highcharts = Highcharts;
   chartOptions: Highcharts.Options = {};
@@ -35,29 +34,9 @@ export class HighPieChartComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(
     private sessionMemoryService:SessionMemoryService,
-    public emitterService: EmitterService
-    ) {}
+  ) {}
 
   ngOnInit(): void {
-    this.generatePieChartConfiguration();
-    this.mapSelectionSubscription = this.emitterService.mapSelected$.subscribe(() => {
-      if (this.chartOptions.series !== undefined) {
-        this.chartOptions.series[0] = {
-          type: 'pie',
-          name: 'Maps',
-          data: this.sessionMemoryService.mapList,
-        }
-        this.chartOptions.legend = {
-          events: {
-            itemClick: this.legendClicked.bind(this)
-          },
-        }
-
-        this.updateFlag = true;
-      }
-    });
-  }
-  ngAfterViewInit(): void {
     this.generatePieChartConfiguration();
   }
 
@@ -67,7 +46,8 @@ export class HighPieChartComponent implements OnInit, AfterViewInit, OnDestroy {
     const targetMap: string = event.legendItem.name;
     this.sessionMemoryService.modifyAvailableMaps(targetMap);
   }
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   chartClicked(event: any): boolean {
     console.log(event);
     return false;
@@ -137,9 +117,5 @@ export class HighPieChartComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       ]
     };
-  }
-
-  ngOnDestroy(): void {
-    this.emitterService.unsubscribe(this.mapSelectionSubscription);
   }
 }

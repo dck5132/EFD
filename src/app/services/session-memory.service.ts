@@ -4,8 +4,6 @@ import { Maps } from '../constants/chart.constants';
 import { RaidTimes } from '../constants/dropdown.constants';
 import { MapData } from '../interfaces/map-data';
 
-import { EmitterService } from './emitter.service';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -23,7 +21,7 @@ export class SessionMemoryService {
 
   selectButtonDisabled = false;
 
-  constructor(public emitterService: EmitterService) {
+  constructor() {
     // populate available maps
     this.mapList.forEach((map: MapData) => {
       this.availableMaps.push(map.name);
@@ -94,8 +92,6 @@ export class SessionMemoryService {
         this.displayedTime = this.selectedTime;
       }
     }
-
-    this.emitterService.onMapSelected(this.selectedMap);
   }
 
 }

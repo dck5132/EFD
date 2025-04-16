@@ -3,7 +3,6 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 // Services
-import { EmitterService } from 'src/app/services/emitter.service';
 import { SessionMemoryService } from 'src/app/services/session-memory.service';
 
 @Component({
@@ -17,7 +16,6 @@ export class DialogComponent {
 
   constructor(
     public sessionMemoryService: SessionMemoryService,
-    public emitterService: EmitterService,
     public dialogRef: MatDialogRef<DialogComponent>
   ) { }
 
