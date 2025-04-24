@@ -3,9 +3,8 @@
         <mat-label class="fw-bold">{{label()}}</mat-label>
         <mat-select
             class="dropdown"
-            [ngModel]="sessionMemoryService.selectedTime()"
-            (ngModelChange)="sessionMemoryService.selectedTime.set($event)"
-            placeholder="{{sessionMemoryService.selectedTime()}}"
+            [ngModel]="sessionMemoryService.chosenTime()"
+            (ngModelChange)="sessionMemoryService.chosenTime.set($event)"
             name="time"
         >
         <!-- New ngFor syntax -->

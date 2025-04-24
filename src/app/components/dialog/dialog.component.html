@@ -1,11 +1,11 @@
 <div class="container">
     <div class="row">
         <div class="col-12 col-sm-12 text-white">
-            @if (sessionMemoryService.selectedMap() === 'The Lab') {
-                <h1 mat-dialog-title>Selected map: {{sessionMemoryService.selectedMap()}}! </h1>
+            @if (sessionMemoryService.displayedMap() === 'The Lab') {
+                <h1 mat-dialog-title>Selected map: {{sessionMemoryService.displayedMap()}}! </h1>
             } 
             @else {
-                <h1 mat-dialog-title>Selected map and time: {{sessionMemoryService.selectedMap()}} at {{sessionMemoryService.displayedTime()}}! </h1>
+                <h1 mat-dialog-title>Selected map and time: {{sessionMemoryService.displayedMap()}} at {{sessionMemoryService.displayedTime()}}! </h1>
             }
             <hr>
             <div class="d-flex flex-row-reverse" mat-dialog-actions>

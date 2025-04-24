@@ -11,10 +11,11 @@ export class SessionMemoryService {
   readonly AllMapNames = signal<string[]>(AllMapNames);
   
   filteredDownMaps = signal<string[]>(this.AllMapNames());
-
-  selectedMap = signal('');
-
-  selectedTime = signal('');
+  // Map displayed on dialog
+  displayedMap = signal('');
+  // Time chosen on dropdown
+  chosenTime = signal(RaidTimes[0]);
+  // Time displayed on dialog
   displayedTime = signal('');
 
   selectButtonDisabled = signal(false);
@@ -36,13 +37,25 @@ export class SessionMemoryService {
   protected determineDisplayedMap(): void {
     const selectedMapIndex = Math.floor(Math.random() * this.filteredDownMaps().length);
     const selectedMap = this.filteredDownMaps()[selectedMapIndex];
-    this.selectedMap.set(selectedMap);
+    this.displayedMap.set(selectedMap);
   }
 
   protected determineDisplayedTime(): void {
-    const selectedTimeIndex = Math.floor(Math.random() * RaidTimes.length);
-    const selectedTime = RaidTimes[selectedTimeIndex];
-    this.displayedTime.set(selectedTime);
+    // If user has not selected a time - pick nighttime or daytime
+    if (this.chosenTime().match('Anytime')) {
+      console.log(RaidTimes.length);
+      // Limit possible indexes to 1-2 to ensure nighttime or daytime is selected
+      const minRange = 1;
+      const possibleIndexes = (RaidTimes.length - minRange) + minRange;
+      const selectedTimeIndex = Math.floor(Math.random() * possibleIndexes);
+      console.log(selectedTimeIndex);
+      const selectedTime = RaidTimes[selectedTimeIndex];
+      this.displayedTime.set(selectedTime);
+    }
+    // If user has selected a specific time, use that time
+    else {
+      this.displayedTime.set(this.chosenTime());
+    }
   }
 
 }
