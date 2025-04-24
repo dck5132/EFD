@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, signal, ViewEncapsulation } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -7,12 +7,6 @@ import { environment } from 'src/environments/environment';
     styleUrls: ['./footer.component.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-export class FooterComponent implements OnInit {
-
-  appVersion?: string;
-
-  ngOnInit(): void {
-    this.appVersion = environment.appVersion;
-  }
-
+export class FooterComponent {
+  appVersion = signal(environment.appVersion);
 }

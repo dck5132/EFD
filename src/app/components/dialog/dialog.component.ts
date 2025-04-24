@@ -21,7 +21,6 @@ export class DialogComponent {
 
   closeDialog(): void {
     this.dialogRef.close();
-    this.sessionMemoryService.selectMap(true);
   }
 
 }

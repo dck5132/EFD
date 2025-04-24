@@ -1,10 +1,11 @@
 <div class="d-flex justify-content-center align-items-center">
   <highcharts-chart #chart
-  class="size"
-  [Highcharts]="Highcharts"
-  [options]="chartOptions"
-  [callbackFunction]="chartCallback"
-  [(update)]="updateFlag"
-  ></highcharts-chart>
+    class="size"
+    [Highcharts]="Highcharts"
+    [options]="chartOptions()"
+    [callbackFunction]="chartCallback"
+    [update]="updateFlag()"
+  >
+  </highcharts-chart>
 </div>
 

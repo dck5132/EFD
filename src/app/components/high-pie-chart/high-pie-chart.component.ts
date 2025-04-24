@@ -1,11 +1,10 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, OnInit, signal, viewChild, ViewEncapsulation } from '@angular/core';
 
 import * as Highcharts from 'highcharts';
 import { HighchartsChartModule } from 'highcharts-angular';
 
-import { Observable, Subscription } from 'rxjs';
-// Interfaces
-import { MapData } from 'src/app/interfaces/map-data';
+// Constants
+import { ChartMaps } from 'src/app/constants/chart.constants';
 // Services
 import { SessionMemoryService } from 'src/app/services/session-memory.service';
 
@@ -17,20 +16,27 @@ import { SessionMemoryService } from 'src/app/services/session-memory.service';
     encapsulation: ViewEncapsulation.None,
 })
 export class HighPieChartComponent implements OnInit {
+  // New way of output
+  // whenAvailableMapsChanged = output<string[]>();
+  // Older way of output
+  // @Output() whenAvailableMapsChanged = new EventEmitter<string[]>();
 
-  @ViewChild('chart')
-  chart$!: Observable<Highcharts.Chart>;
-
-  data: MapData[] = [];
-
+  // Highcharts module
   Highcharts: typeof Highcharts = Highcharts;
-  chartOptions: Highcharts.Options = {};
-  chartCallback: Highcharts.ChartCallbackFunction = function (chart) { 
-    return chart;
-  }
-  updateFlag = false;
+  // viewchild for chart
+  chart = viewChild.required<ElementRef>(ElementRef);
+  // older way of viewchild
+  // @ViewChild('chart') chart: ElementRef;
 
-  mapSelectionSubscription!: Subscription;
+  // Signal for chart options
+  chartOptions = signal<Highcharts.Options>({});
+  // Signal used to do callback function
+  chartCallback = signal<Highcharts.ChartCallbackFunction>(function (chart) {
+    return chart;
+  });
+  updateFlag = signal(false);
+
+  availableMaps = signal<string[]>([]);
 
   constructor(
     private sessionMemoryService:SessionMemoryService,
@@ -42,20 +48,13 @@ export class HighPieChartComponent implements OnInit {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   legendClicked(event: any): void {
-    console.log(event.legendItem.name);
     const targetMap: string = event.legendItem.name;
     this.sessionMemoryService.modifyAvailableMaps(targetMap);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  chartClicked(event: any): boolean {
-    console.log(event);
-    return false;
-  }
-
   generatePieChartConfiguration(): void {
     // Create Chart
-    this.chartOptions = {
+    this.chartOptions.set({
       chart: {
         plotShadow: false,
         backgroundColor: 'black',
@@ -110,12 +109,12 @@ export class HighPieChartComponent implements OnInit {
         {
           type: 'pie',
           name: 'Maps',
-          data: this.sessionMemoryService.mapList,
+          data: ChartMaps,
           events: {
-            click: this.chartClicked.bind(this)
+            click: () => {return false} 
           }
         }
       ]
-    };
+    });
   }
 }

@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, signal, ViewEncapsulation } from '@angular/core';
 // Components
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -13,5 +13,5 @@ import { RouterModule } from '@angular/router';
     encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent {
-  title = 'Escape-From-Decisions';
+  title = signal('Escape-From-Decisions');
 }

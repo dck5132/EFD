@@ -1,97 +1,48 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 
-import { Maps } from '../constants/chart.constants';
+import { AllMapNames } from '../constants/chart.constants';
 import { RaidTimes } from '../constants/dropdown.constants';
-import { MapData } from '../interfaces/map-data';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SessionMemoryService {
 
-  mapList = Maps;
+  readonly AllMapNames = signal<string[]>(AllMapNames);
+  
+  filteredDownMaps = signal<string[]>(this.AllMapNames());
 
-  availableMaps: string[] = [];
+  selectedMap = signal('');
 
-  selectedMap = '';
+  selectedTime = signal('');
+  displayedTime = signal('');
 
-  selectedTime = '';
-  displayTime = true;
-  displayedTime = '';
+  selectButtonDisabled = signal(false);
 
-  selectButtonDisabled = false;
-
-  constructor() {
-    // populate available maps
-    this.mapList.forEach((map: MapData) => {
-      this.availableMaps.push(map.name);
-    });
-   }
-
-  public modifyAvailableMaps(map: string): void {
-    if (this.availableMaps.indexOf(map) !== -1) {
-      this.availableMaps = this.availableMaps.filter(ml => ml !== map);
-    } else {
-      this.availableMaps.push(map);
-    }
-    // check length of available maps so that there is more then 1 map
-    this.modifyAvailableTimes();
-  }
-
-  public modifyAvailableTimes(): void {
-    if (this.availableMaps.length < 1) {
-      this.selectButtonDisabled = true;
-    }
-    else if (this.availableMaps.length === 1 && (this.availableMaps.indexOf('The Lab') !== -1 || !this.selectedTime.match(/Anytime/))) {
-      this.selectButtonDisabled = true;
+  public modifyAvailableMaps(selectedMap: string): void {
+    if (this.filteredDownMaps().indexOf(selectedMap) !== -1) {
+      this.filteredDownMaps.update((maps) => maps.filter(currentMap => currentMap !== selectedMap));
     }
     else {
-      this.selectButtonDisabled = false;
+      this.filteredDownMaps.update((maps) => [...maps, selectedMap]);
     }
   }
 
-  public selectMap(clear = false): void {
-    let returnValue: string;
+  public determineDisplayedMapAndTime(): void {
+    this.determineDisplayedMap();
+    this.determineDisplayedTime();
+  }
 
-    if (clear) {
-      returnValue = '';
-    }
-    else {
-      returnValue = this.availableMaps[
-        Math.floor(Math.random() * this.availableMaps.length)
-      ];
-    }
+  protected determineDisplayedMap(): void {
+    const selectedMapIndex = Math.floor(Math.random() * this.filteredDownMaps().length);
+    const selectedMap = this.filteredDownMaps()[selectedMapIndex];
+    this.selectedMap.set(selectedMap);
+  }
 
-    this.selectedMap = returnValue;
-
-    // Handle special condition in The Lab where you can't choose a time
-    if (this.selectedMap.match(/The Lab/)) {
-      this.displayTime = false;
-    }
-    else {
-      this.displayTime = true;
-    }
-
-    this.mapList.forEach((map: MapData) => {
-      if (map.name === this.selectedMap && this.availableMaps.length > 1) {
-        map.sliced = true;
-      }
-      else {
-        map.sliced = false;
-      }
-    });
-
-    if (!clear) {
-      if (this.selectedTime.match(/Anytime/) && this.displayTime) {
-        this.displayedTime = RaidTimes[
-          1 + Math.floor(Math.random() * 2)
-        ];
-      }
-      else {
-        console.log(this.displayedTime);
-        this.displayedTime = this.selectedTime;
-      }
-    }
+  protected determineDisplayedTime(): void {
+    const selectedTimeIndex = Math.floor(Math.random() * RaidTimes.length);
+    const selectedTime = RaidTimes[selectedTimeIndex];
+    this.displayedTime.set(selectedTime);
   }
 
 }

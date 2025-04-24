@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, computed, OnInit, signal, ViewEncapsulation } from '@angular/core';
 
 import { MatDialog } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
@@ -18,23 +18,29 @@ import { HighPieChartComponent } from '../high-pie-chart/high-pie-chart.componen
     styleUrls: ['./decision-maker.component.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-export class DecisionMakerComponent {
+export class DecisionMakerComponent implements OnInit {
 
-  raidTimes = RaidTimes;
-  raidTimesLabel = 'Please select your prefered raid time: ';
+  raidTimes = signal<string[]>([]);
+  readonly raidTimesLabel = signal('Please select your prefered raid time: ');
+  selectButtonDisabled = computed(() => this.sessionMemoryService.filteredDownMaps().length <= 1 ? true : false);
+  // Example of passing function to computed signal property
+  // selectButtonDisabled = computed(() => this.checkButtonDisabled());
 
   constructor(
     public sessionMemoryService: SessionMemoryService,
     public dialog: MatDialog
   ) { }
+  
+  ngOnInit(): void {
+    this.raidTimes.set(RaidTimes);
+  }
 
-  activate(): void {
-    this.sessionMemoryService.selectMap();
+  protected activate(): void {
+    this.sessionMemoryService.determineDisplayedMapAndTime();
     this.openDialog();
   }
 
-  openDialog(): void {
+  protected openDialog(): void {
     this.dialog.open(DialogComponent);
   }
-
 }

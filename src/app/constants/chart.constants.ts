@@ -1,6 +1,6 @@
 import { MapData } from "../interfaces/map-data";
 
-export const Maps: MapData[] = [
+export const ChartMaps: MapData[] = [
     {
       name: 'Interchange',
       y: 10,
@@ -52,3 +52,5 @@ export const Maps: MapData[] = [
       color: '#4f3539'
     },
   ];
+
+export const AllMapNames = ChartMaps.map((map) => map.name);
