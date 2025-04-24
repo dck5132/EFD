@@ -1,18 +1,18 @@
-<div class="d-flex justify-content-center align-items-center">
-    <div class="my-2">
+<div class="d-flex justify-content-center align-items-center my-2">
+    <mat-form-field>
         <mat-label class="fw-bold">{{label()}}</mat-label>
         <mat-select
             class="dropdown"
-            [ngModel]="sessionMemoryService.chosenTime()"
-            (ngModelChange)="sessionMemoryService.chosenTime.set($event)"
             name="time"
+            [value]="sessionMemoryService.chosenTime()"
+            (selectionChange)="sessionMemoryService.chosenTime.set($event.value)"
         >
-        <!-- New ngFor syntax -->
+            <!-- New ngFor syntax -->
             @for (option of options(); track option) {
                 <mat-option [value]="option">
                     {{option}}
                 </mat-option>
             }
         </mat-select>
-    </div>
+    </mat-form-field>
 </div>

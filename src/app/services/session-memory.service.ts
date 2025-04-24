@@ -1,7 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 
 import { AllMapNames } from '../constants/chart.constants';
-import { RaidTimes } from '../constants/dropdown.constants';
+import { AllRaidTimeChoices, PossibleRaidTimesToDisplay } from '../constants/dropdown.constants';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class SessionMemoryService {
   // Map displayed on dialog
   displayedMap = signal('');
   // Time chosen on dropdown
-  chosenTime = signal(RaidTimes[0]);
+  chosenTime = signal(AllRaidTimeChoices[0]);
   // Time displayed on dialog
   displayedTime = signal('');
 
@@ -44,10 +44,9 @@ export class SessionMemoryService {
     // If user has not selected a time - pick nighttime or daytime for them
     if (this.chosenTime().match('Anytime')) {
       // Limit possible indexes to 1-2 to ensure nighttime or daytime is selected
-      const minRange = 1;
-      const possibleIndexes = (RaidTimes.length - minRange) + minRange;
-      const selectedTimeIndex = Math.floor(Math.random() * possibleIndexes);
-      const selectedTime = RaidTimes[selectedTimeIndex];
+      const selectedTimeIndex = Math.floor(Math.random() * PossibleRaidTimesToDisplay.length);
+      console.log(selectedTimeIndex);
+      const selectedTime = PossibleRaidTimesToDisplay[selectedTimeIndex];
       this.displayedTime.set(selectedTime);
     }
     // If user has selected a specific time, use that time

@@ -3,6 +3,7 @@
         <div class="col-12 col-sm-12 text-white">
             @if (sessionMemoryService.displayedMap() === 'The Lab') {
                 <h1 mat-dialog-title>Selected map: {{sessionMemoryService.displayedMap()}}! </h1>
+                <h1 mat-dialog-content> {{sessionMemoryService.displayedMap()}} doesn't allow you to deploy at a specific time of day - so no time has been chosen </h1>
             } 
             @else {
                 <h1 mat-dialog-title>Selected map and time: {{sessionMemoryService.displayedMap()}} at {{sessionMemoryService.displayedTime()}}! </h1>
