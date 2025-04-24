@@ -41,14 +41,12 @@ export class SessionMemoryService {
   }
 
   protected determineDisplayedTime(): void {
-    // If user has not selected a time - pick nighttime or daytime
+    // If user has not selected a time - pick nighttime or daytime for them
     if (this.chosenTime().match('Anytime')) {
-      console.log(RaidTimes.length);
       // Limit possible indexes to 1-2 to ensure nighttime or daytime is selected
       const minRange = 1;
       const possibleIndexes = (RaidTimes.length - minRange) + minRange;
       const selectedTimeIndex = Math.floor(Math.random() * possibleIndexes);
-      console.log(selectedTimeIndex);
       const selectedTime = RaidTimes[selectedTimeIndex];
       this.displayedTime.set(selectedTime);
     }

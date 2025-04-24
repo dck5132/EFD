@@ -1,10 +1,15 @@
 <app-high-pie-chart></app-high-pie-chart>
-<app-dropdown [label]="raidTimesLabel()" [options]="raidTimes()"></app-dropdown>
+<app-dropdown
+    class="my-2"
+    [label]="raidTimesLabel()"
+    [options]="raidTimes()"
+>
+</app-dropdown>
 <button
     mat-raised-button
+    class="d-block mx-auto my-2"
     color="primary"
     [disabled]="selectButtonDisabled()"
-    class="d-block mx-auto"
     (click)="activate()"
 >
     Select a Map
