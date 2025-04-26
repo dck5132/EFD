@@ -30,13 +30,13 @@ export class DialogComponent {
 
   constructor(public sessionMemoryService: SessionMemoryService) {}
 
-  determineDisplayedMap(): string {
+  private determineDisplayedMap(): string {
     const selectedMapIndex = Math.floor(Math.random() * this.sessionMemoryService.filteredDownMaps().length);
     const selectedMap = this.sessionMemoryService.filteredDownMaps()[selectedMapIndex];
     return selectedMap;
   }
 
-  protected determineDisplayedTime(): string {
+  private determineDisplayedTime(): string {
     // If user has not selected a time - pick nighttime or daytime for them
     if (this.sessionMemoryService.chosenTime().match('Anytime')) {
       // Limit possible indexes to 1-2 to ensure nighttime or daytime is selected
