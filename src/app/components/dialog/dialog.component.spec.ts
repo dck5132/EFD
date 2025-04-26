@@ -19,12 +19,12 @@ describe('DialogComponent', () => {
       providers: []
     })
     .compileComponents();
-    sessionMemoryService = TestBed.inject(SessionMemoryService);
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(DialogComponent);
     component = fixture.componentInstance;
+    sessionMemoryService = TestBed.inject(SessionMemoryService);
     fixture.detectChanges();
   });
 
@@ -32,7 +32,7 @@ describe('DialogComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe ('Title and content logic', () => {
+  describe ('Title and content determination and display logic', () => {
 
     it ('should limit the possible maps chosen based on the filteredDownmaps array', () => {
       sessionMemoryService.filteredDownMaps.set(['The Lab', 'Woods', 'Shoreline']);

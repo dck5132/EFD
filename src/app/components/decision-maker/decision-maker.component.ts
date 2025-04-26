@@ -19,7 +19,8 @@ import { HighPieChartComponent } from '../high-pie-chart/high-pie-chart.componen
 })
 export class DecisionMakerComponent {
 
-  readonly selectRaidTimesLabel = signal('Select a raid time (optional): ');
+  readonly selectRaidTimesLabel = signal('Select a raid time (optional):').asReadonly();
+  readonly buttonText = signal('Select a map and time').asReadonly();
 
   selectRaidTimes = signal<string[]>(AllRaidTimeChoices);
   selectButtonDisabled = computed(() => this.sessionMemoryService.filteredDownMaps().length <= 1 ? true : false);
@@ -30,11 +31,6 @@ export class DecisionMakerComponent {
     public sessionMemoryService: SessionMemoryService,
     public dialog: MatDialog
   ) { }
-
-  // protected selectMapAndTime(): void {
-  //   this.sessionMemoryService.determineDisplayedMapAndTime();
-  //   this.openDialog();
-  // }
 
   protected openDialog(): void {
     this.dialog.open(DialogComponent);
