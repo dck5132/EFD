@@ -15,13 +15,13 @@ import { HighPieChartComponent } from '../high-pie-chart/high-pie-chart.componen
     selector: 'app-decision-maker',
     imports: [MatButtonModule, DropdownComponent, HighPieChartComponent],
     templateUrl: './decision-maker.component.html',
-    styleUrls: ['./decision-maker.component.scss'],
     encapsulation: ViewEncapsulation.None,
 })
 export class DecisionMakerComponent {
 
-  selectRaidTimes = signal<string[]>(AllRaidTimeChoices);
   readonly selectRaidTimesLabel = signal('Select a raid time (optional): ');
+
+  selectRaidTimes = signal<string[]>(AllRaidTimeChoices);
   selectButtonDisabled = computed(() => this.sessionMemoryService.filteredDownMaps().length <= 1 ? true : false);
   // Example of passing function to computed signal property
   // selectButtonDisabled = computed(() => this.checkButtonDisabled());
@@ -31,10 +31,10 @@ export class DecisionMakerComponent {
     public dialog: MatDialog
   ) { }
 
-  protected activate(): void {
-    this.sessionMemoryService.determineDisplayedMapAndTime();
-    this.openDialog();
-  }
+  // protected selectMapAndTime(): void {
+  //   this.sessionMemoryService.determineDisplayedMapAndTime();
+  //   this.openDialog();
+  // }
 
   protected openDialog(): void {
     this.dialog.open(DialogComponent);
