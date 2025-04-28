@@ -6,5 +6,5 @@ import { Component, signal, ViewEncapsulation } from '@angular/core';
     encapsulation: ViewEncapsulation.None,
 })
 export class HeaderComponent {
-    headerTitle = signal('Welcome to Escape from Decision!');
+    headerTitle = signal('Welcome to Escape from Decisions!');
 }

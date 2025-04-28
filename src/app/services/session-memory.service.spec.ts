@@ -20,7 +20,7 @@ describe('SessionMemoryService', () => {
       expect(service.filteredDownMaps()).not.toContain('The Lab');
     });
     // Simulates what happens when a user clicks on a map in the chart legend twice
-    it ('should add a map to the list of avialable maps if it doesn\'t match the value in the array', () => {
+    it ('should add a map to the list of available maps if it doesn\'t match the value in the array', () => {
       service.modifyAvailableMaps('The Lab');
       service.modifyAvailableMaps('The Lab');
       expect(service.filteredDownMaps()).toContain('The Lab');
